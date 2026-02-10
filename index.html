@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, viewport-fit=cover"/>
+        <meta http-equiv="X-UA-compatible" content="IE=edge" />
+
+        <link rel="stylesheet" type="text/css" href="./assets/css/lib/jquery-ui.css" />
+        <link rel="stylesheet" type="text/css" href="./assets/css/lib/swiper.min.css" />
+        <link rel="stylesheet" type="text/css" href="./assets/css/lib/aos.css" />
+        <link rel="stylesheet" type="text/css" href="./assets/css/style.css" />
+
+        <script src="./assets/js/lib/jquery-3.6.0.min.js"></script>
+        <script src="./assets/js/lib/jquery-ui.min.js"></script>
+        <script src="./assets/js/lib/swiper.min.js"></script>
+        <script src="./assets/js/lib/aos.js"></script>
+        <script src="./assets/js/common.js"></script>
+        <title>PORTFOLIO</title>
+    </head>
+    <body>
+        <div id="wrap">
+            <!-- header -->
+            <header id="header">
+                <div class="inner">
+                    <div class="logoWrap">
+                        <h1>
+                            <a href="/index.html"><img src="./assets/img/img-logo.png" alt="kimdoyeon"></a>
+                        </h1>
+                    </div>
+                    <div class="navWrap">
+                        <div class="navList">
+                            <ul>
+                                <!-- <li><a href="#" data-target="introSec">About</a></li> -->
+                                <li><a href="#" data-target="projectSec">Portfolio</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </header>
+            <!--// header -->
+
+            <div id="container">
+                <section class="projectSec">
+                    <h3 class="blind">프로젝트 영역</h3>
+                    <div class="inner">
+                        <h4><img src="./assets/img/img-portfolio.png" alt="portfolio"></h4>
+                        <p>
+                            Designing Thoughtful Interfaces. Creating Better Experiences.<br/>
+                            Simple. Smart. User-Driven Digital Design.
+                        </p>
+                        <div class="tabs" id="tabs"></div>
+                        <div class="projects active" id="projectList"></div>
+                    </div>
+                </section>
+            </div>
+            
+            <!-- footer -->
+            <footer id="footer">
+                <div class="inner">
+                    <div class="addrArea">
+                        <div class="address">
+                            <h3>EASY TO SEE, EASY TO USE.</h3>
+                        </div>
+                        <div class="contact">
+                            <p>
+                                <span>E-mail : 123456789@aaaaaaaaaaa</span>
+                                <span>Tel : 010-1234-5678</span>
+                            </p>
+                            <p class="copy">© 2026 Kim Doyeon. All rights reserved.</p>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+            <!--// footer -->
+        </div>
+
+        <!-- Modal -->
+        <div class="modal" id="modal">
+            <div class="modal-content">
+                <img id="modalImg" src="" alt="프로젝트 상세 이미지" />
+            </div>
+            <button type="button" class="close" id="close">X</button>
+        </div>
+    </body>
+</html>
+
+<script>
+    // ===== 프로젝트 영역 =====
+    const tabsEl = document.getElementById('tabs');
+    const projectListEl = document.getElementById('projectList');
+    const modal = document.getElementById('modal');
+    const modalContent = modal.querySelector('.modal-content');
+    const closeBtn = document.getElementById('close');
+
+    let projectData = null;
+
+    /* ===== JSON 불러오기 ===== */
+    fetch('projects.json')
+    .then(res => {
+        if (!res.ok) throw new Error('JSON load failed');
+        return res.json();
+    })
+    .then(data => {
+        projectData = data;
+
+        const defaultType = projectData.tabs[0]?.id;
+        if (!defaultType) return;
+
+        renderTabs(defaultType);
+        renderProjects(defaultType);
+    })
+    .catch(err => console.error(err));
+
+    /* ===== 탭 렌더링 ===== */
+    function renderTabs(activeType) {
+    tabsEl.innerHTML = '';
+
+    projectData.tabs.forEach(tab => {
+        const btn = document.createElement('button');
+        btn.className = 'tab' + (tab.id === activeType ? ' active' : '');
+        btn.textContent = tab.label;
+
+        btn.addEventListener('click', () => {
+        document.querySelectorAll('.tab').forEach(t =>
+            t.classList.remove('active')
+        );
+        btn.classList.add('active');
+        renderProjects(tab.id);
+        });
+
+        tabsEl.appendChild(btn);
+    });
+    }
+
+    /* ===== 프로젝트 렌더링 ===== */
+    function renderProjects(type) {
+    projectListEl.innerHTML = '';
+
+    const filtered = projectData.projects.filter(p => p.type === type);
+
+    if (!filtered.length) {
+        projectListEl.innerHTML = '<p class="empty">프로젝트가 없습니다.</p>';
+        return;
+    }
+
+    filtered.forEach(project => {
+        const card = document.createElement('div');
+        card.className = 'project';
+
+        // ✅ 이미지 배열 처리
+        const images = project.images && project.images.length
+        ? project.images
+        : project.image
+            ? [project.image]
+            : [];
+
+        card.innerHTML = `
+        <div class="thumb">
+            <img src="${images[0] || ''}" alt="${project.title}">
+            <div class="overlay"><span>VIEW</span></div>
+        </div>
+        <div class="project-info">
+            <h3>${project.title}</h3>
+            <p>${project.desc}</p>
+        </div>
+        `;
+
+        card.addEventListener('click', () => openModal(images));
+        projectListEl.appendChild(card);
+    });
+    }
+
+    /* ===== 모달 열기 (이미지 세로 나열) ===== */
+    function openModal(images) {
+    modalContent.innerHTML = ''; // 초기화
+
+    images.forEach(src => {
+        const img = document.createElement('img');
+        img.src = src;
+        img.alt = '프로젝트 이미지';
+        modalContent.appendChild(img);
+    });
+
+    modal.classList.add('active');
+    bodyLock?.();
+
+    // 스크롤 최상단
+    modalContent.scrollTop = 0;
+    }
+
+    /* ===== 모달 닫기 ===== */
+    closeBtn.addEventListener('click', closeModal);
+
+    modal.addEventListener('click', e => {
+        if (e.target === modal) closeModal();
+    });
+
+    function closeModal() {
+        modal.classList.remove('active');
+        modalContent.innerHTML = '';
+        bodyUnlock?.();
+    }
+</script>
