@@ -9,9 +9,12 @@
   "projects": [
     {
       "type": "web",
-      "title": "메디컬 에스테틱 웹사이트 리뉴얼",
+      "title": "[메디컬 에스테틱] 웹사이트 리뉴얼",
       "desc": "<span>Web</span><span>Renewal</span><span>Responsive</span>",
-      "image": "./assets/img/projects/img-project-web-01.png"
+      "images": [
+        "./assets/img/projects/img-project-web-01.png",
+        "./assets/img/projects/img-project-web-01-1.png"
+      ]
     },
     {
       "type": "web", 
@@ -21,19 +24,19 @@
     }, 
     {
       "type": "web",
-      "title": "부산은행 KMS 고도화",
+      "title": "[부산은행] KMS 고도화",
       "desc": "<span>Web</span><span>advancement</span>",
       "image": "./assets/img/projects/img-project-web-03.png"
     }, 
     {
       "type": "web",
-      "title": "리즈마 웹사이트 구축",
+      "title": "[리즈마] 웹사이트 구축",
       "desc": "<span>Web</span><span>Responsive</span>",
       "image": "./assets/img/projects/img-project-web-04.png"
     }, 
     {
       "type": "web",
-      "title": "하나금융그룹 웹사이트 리뉴얼",
+      "title": "[하나금융그룹] 웹사이트 리뉴얼",
       "desc": "<span>Web</span><span>Renewal</span><span>Responsive</span>",
       "image": "./assets/img/projects/img-project-web-05.png"
     }, 
@@ -43,8 +46,8 @@
 
     {
       "type": "mobile",
-      "title": "T Membership 에이닷",
-      "desc": "<span>Web</span><span>Renewal</span><span>Responsive</span>",
+      "title": "[SKT] 에이닷 고도화 프로젝트",
+      "desc": "<span>App</span><span>Renewal</span>",
       "image": "./assets/img/projects/img-project-mobile-01.png"
     },
 
@@ -99,13 +102,13 @@
 
     {
       "type": "promotion",
-      "title": "Dr.G",
+      "title": "[SKT] 에이닷 고도화 프로젝트",
       "desc": "<span>Web</span><span>Renewal</span><span>Responsive</span>",
       "image": "./assets/img/projects/img-project-promotion-01.png"
     },
     {
       "type": "promotion",
-      "title": "볼보트럭 코리아",
+      "title": "[볼보트럭 코리아] 유지보수 운영",
       "desc": "<span>Web</span><span>Responsive</span>",
       "image": "./assets/img/projects/img-project-promotion-02.png"
     },
@@ -118,8 +121,8 @@
       "desc": "<span>APP</span><span>planning</span><span>personal project</span>",
       "images": [
         "./assets/img/projects/img-project-personal-01.png",
-        "./assets/img/projects/img-project-personal-01-2.png",
-        "./assets/img/projects/img-project-personal-01-3.png"
+        "./assets/img/projects/img-project-personal-01-1.png",
+        "./assets/img/projects/img-project-personal-01-2.png"
       ]
     },
     {
@@ -128,8 +131,8 @@
       "desc": "<span>Web</span><span>planning</span><span>personal project</span>",
       "images": [
         "./assets/img/projects/img-project-personal-02.png",
-        "./assets/img/projects/img-project-personal-02-2.png",
-        "./assets/img/projects/img-project-personal-02-3.png"
+        "./assets/img/projects/img-project-personal-02-1.png",
+        "./assets/img/projects/img-project-personal-02-2.png"
       ]
     }
   ]

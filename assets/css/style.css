@@ -841,7 +841,7 @@ section.projectSec .inner {
   width: 100%;
   max-width: 1400px;
   margin: 0 auto;
-  padding: 160px 0px;
+  padding: 64px 0px;
   text-align: center;
 }
 section.projectSec .inner > h4 {
@@ -871,9 +871,53 @@ section.projectSec .inner .tabs .tab {
   cursor: pointer;
   font-size: 20px;
   font-weight: bold;
-  color: #384059;
+  color: #B6B6C8;
 }
 section.projectSec .inner .tabs .tab.active {
+  color: #384059;
+  background: linear-gradient(90deg, rgb(244, 244, 255) 0%, rgb(223, 224, 246) 50%, rgb(244, 244, 255) 100%);
+}
+section.projectSec .inner .custom-select {
+  position: relative;
+  width: 100%;
+  height: 56px;
+  display: none;
+}
+section.projectSec .inner .custom-select .select-btn {
+  padding: 0px 24px;
+  height: 34px;
+  width: 100%;
+  font-size: 20px;
+  font-weight: bold;
+  color: #384059;
+  text-align: left;
+  cursor: pointer;
+  background: url("../img/icon/ico-arr-down.svg") no-repeat 90% 50%/16px;
+}
+section.projectSec .inner .custom-select .select-btn.active {
+  background: url("../img/icon/ico-arr-up.svg") no-repeat 90% 50%/16px;
+}
+section.projectSec .inner .custom-select .select-list {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  z-index: 10;
+  background: #fff;
+  border-radius: 32px;
+  box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.1);
+}
+section.projectSec .inner .custom-select .select-list li {
+  padding: 10px 32px;
+  font-size: 20px;
+  font-weight: bold;
+  color: #384059;
+  height: 52px;
+  cursor: pointer;
+}
+section.projectSec .inner .custom-select .select-list li:hover {
+  color: #384059;
   background: linear-gradient(90deg, rgb(244, 244, 255) 0%, rgb(223, 224, 246) 50%, rgb(244, 244, 255) 100%);
 }
 section.projectSec .inner .projects {
@@ -939,7 +983,7 @@ section.projectSec .inner .projects .project .thumb .overlay span {
 }
 section.projectSec .inner .projects .project .thumb:hover .overlay {
   visibility: visible;
-  opacity: 1; /* 마우스 오버시 나타남 */
+  opacity: 1;
 }
 section.projectSec .inner .projects .project .project-info {
   padding: 16px 0px;
@@ -975,31 +1019,34 @@ section.projectSec .inner .projects .project .project-info p span {
   display: flex;
 }
 .modal .modal-content {
-  background: #fff;
+  background: rgba(0, 0, 0, 0.6);
   width: 100%;
   height: calc(100dvh - 0px);
-  padding: 24px 20px;
+  padding: 80px 40px 180px;
   position: relative;
   overflow: auto;
+  border-radius: 16px;
 }
-.modal .modal-content img {
+.modal .modal-content > div {
+  overflow: hidden;
+  border-radius: 16px;
+}
+.modal .modal-content > div img {
   width: 100%;
-  border-radius: 12px;
 }
 .modal .close {
-  position: absolute;
-  top: 5%;
-  right: 4%;
-  font-size: 34px;
+  position: fixed;
+  bottom: 40px;
+  left: 50%;
+  transform: translate(-50%, 0%);
   color: #fff;
-  font-size: 0px;
-  width: 34px;
-  height: 34px;
-  background: url("../img/icon/ico-close.png") no-repeat 50%/14px;
-  filter: invert(0.8) grayscale(0.8);
-  border-radius: 50%;
-  border: 2px solid #000;
-  box-shadow: 0px 1px 4px rgba(255, 255, 255, 0.2);
+  font-size: 20px;
+  font-weight: 500;
+  width: 280px;
+  height: 64px;
+  border-radius: 16px;
+  border: 1px solid #999;
+  background: rgba(0, 0, 0, 0.8);
 }
 
 .popWrap {
@@ -1222,33 +1269,67 @@ section.projectSec .inner .projects .project .project-info p span {
   section .inner {
     padding: 100px 0px;
   }
+  section.projectSec {
+    background-position: 50% 50%;
+  }
+  section.projectSec .inner h4 {
+    width: 288px;
+    margin-bottom: 12px;
+  }
+  section.projectSec .inner p {
+    font-size: 15px;
+    color: #333;
+    margin-bottom: 40px;
+  }
   section.projectSec .inner .tabs {
     width: 100%;
-    overflow-y: auto;
     border-radius: 100px;
+    margin-bottom: 60px;
+    height: 56px;
   }
   section.projectSec .inner .projects .project {
     width: 48%;
+    border-radius: 6px;
+    margin-bottom: 24px;
+  }
+  section.projectSec .inner .projects .project .thumb {
+    height: 99px;
+  }
+  section.projectSec .inner .projects .project .project-info {
+    padding-bottom: 0;
   }
   section.projectSec .inner .projects .project .project-info h3 {
     font-size: 18px;
+    font-weight: 600;
+  }
+  section.projectSec .inner .projects .project .project-info p {
+    margin-bottom: 0;
   }
   section.projectSec .inner .projects .project .project-info p span {
+    display: inline-block;
+    height: 22px;
     font-size: 11px;
-    padding: 2px 6px 3px;
+    padding: 2px 8px 3px;
   }
   .modal .modal-content {
     height: calc(100dvh - 0px);
-    padding: 55px 20px;
   }
   .modal .close {
-    width: 20px;
-    height: 20px;
-    top: 20px;
-    right: 20px;
+    font-size: 16px;
+    border-radius: 8px;
+    width: 100px;
+    height: 40px;
     z-index: 9;
-    filter: invert(0);
     text-shadow: 0px 1px 6px rgba(255, 255, 255, 0.5);
+  }
+  .tabs {
+    padding: 10px 0px !important;
+  }
+  .tabs .tab {
+    display: none;
+  }
+  .custom-select {
+    display: block !important;
   }
 }
 @media all and (max-width: 767px) {

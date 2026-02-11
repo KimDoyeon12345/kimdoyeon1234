@@ -67,38 +67,6 @@ $(document).ready(() => {
     headerActiveCheck();
 });
 
-document.addEventListener('include:done', () => {
-    console.log('✅ include 완료');
-
-    wrap = document.getElementById('wrap');
-
-    // AOS
-    if (window.AOS) {
-        AOS.init({ duration: 1000 });
-    }
-
-    // header scroll
-    headerActiveCheck();
-    $(window).on('scroll', headerActiveCheck);
-
-    // 최초 실행
-    syncHeight();
-});
-
-// 동적 include 헤더도 적용되도록 이벤트 위임 사용
-$(document).on('click', '.navList a', function(e) {
-    e.preventDefault();
-
-    const targetClass = $(this).data('target');       // data-target에 클래스명 넣기
-    const $target = $('.' + targetClass);             // 클래스 선택
-    if (!$target.length) return;
-
-    const headerHeight = $('#header').outerHeight() || 0; // 헤더가 fixed이면 높이 고려
-    const offsetTop = $target.offset().top - headerHeight;
-
-    $('html, body').stop().animate({ scrollTop: offsetTop }, 500);
-});
-
 
 /* ------------------------------
    window 이벤트

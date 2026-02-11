@@ -47,7 +47,14 @@
                             Designing Thoughtful Interfaces. Creating Better Experiences.<br/>
                             Simple. Smart. User-Driven Digital Design.
                         </p>
-                        <div class="tabs" id="tabs"></div>
+                        <div class="tabs" id="tabs">
+                            <div class="custom-select">
+                                <button type="button" class="select-btn">
+                                    <span class="label">Select</span>
+                                </button>
+                                <ul class="select-list"></ul>
+                            </div>
+                        </div>
                         <div class="projects active" id="projectList"></div>
                     </div>
                 </section>
@@ -76,9 +83,11 @@
         <!-- Modal -->
         <div class="modal" id="modal">
             <div class="modal-content">
-                <img id="modalImg" src="" alt="프로젝트 상세 이미지" />
+                <div>
+                    <img id="modalImg" src="" alt="프로젝트 상세 이미지" />
+                </div>
             </div>
-            <button type="button" class="close" id="close">X</button>
+            <button type="button" class="close" id="close">닫기</button>
         </div>
     </body>
 </html>
@@ -88,7 +97,7 @@
     const tabsEl = document.getElementById('tabs');
     const projectListEl = document.getElementById('projectList');
     const modal = document.getElementById('modal');
-    const modalContent = modal.querySelector('.modal-content');
+    const modalContent = modal.querySelector('.modal-content > div');
     const closeBtn = document.getElementById('close');
 
     let projectData = null;
@@ -112,23 +121,79 @@
 
     /* ===== 탭 렌더링 ===== */
     function renderTabs(activeType) {
-    tabsEl.innerHTML = '';
+        tabsEl.innerHTML = `
+            <div class="custom-select">
+                <button type="button" class="select-btn">
+                    <span class="label"></span>
+                </button>
+                <ul class="select-list"></ul>
+            </div>
+        `;
 
-    projectData.tabs.forEach(tab => {
-        const btn = document.createElement('button');
-        btn.className = 'tab' + (tab.id === activeType ? ' active' : '');
-        btn.textContent = tab.label;
+        const customSelect = tabsEl.querySelector('.custom-select');
+        const selectBtn = customSelect.querySelector('.select-btn');
+        const selectLabel = customSelect.querySelector('.label');
+        const selectList = customSelect.querySelector('.select-list');
 
-        btn.addEventListener('click', () => {
-        document.querySelectorAll('.tab').forEach(t =>
-            t.classList.remove('active')
-        );
-        btn.classList.add('active');
-        renderProjects(tab.id);
+        projectData.tabs.forEach(tab => {
+            // ===== PC 탭 버튼 =====
+            const btn = document.createElement('button');
+            btn.className = 'tab' + (tab.id === activeType ? ' active' : '');
+            btn.textContent = tab.label;
+
+            btn.addEventListener('click', () => {
+                setActiveTab(tab.id);
+            });
+
+            tabsEl.appendChild(btn);
+
+            // ===== 모바일 셀렉트 옵션 =====
+            const li = document.createElement('li');
+            li.textContent = tab.label;
+            li.dataset.id = tab.id;
+
+            if (tab.id === activeType) {
+                selectLabel.textContent = tab.label;
+            }
+
+            li.addEventListener('click', () => {
+                setActiveTab(tab.id);
+                selectList.style.display = 'none';
+            });
+
+            selectList.appendChild(li);
         });
 
-        tabsEl.appendChild(btn);
-    });
+        // 셀렉트 열기
+        selectBtn.addEventListener('click', () => {
+            selectList.style.display = selectList.style.display === 'block' ? 'none' : 'block';
+            selectBtn.classList.toggle('active');
+        });
+
+        // 외부 클릭 닫기
+        document.addEventListener('click', e => {
+            if (!customSelect.contains(e.target)) {
+                selectList.style.display = 'none';
+            }
+        });
+    }
+
+    function setActiveTab(type) {
+        // 버튼 active 변경
+        document.querySelectorAll('.tab').forEach(btn => {
+            btn.classList.toggle('active', btn.textContent === getLabel(type));
+        });
+
+        // 셀렉트 라벨 변경
+        const label = document.querySelector('.custom-select .label');
+        if (label) label.textContent = getLabel(type);
+
+        renderProjects(type);
+    }
+
+    function getLabel(type) {
+        const found = projectData.tabs.find(t => t.id === type);
+        return found ? found.label : '';
     }
 
     /* ===== 프로젝트 렌더링 ===== */
@@ -146,7 +211,7 @@
         const card = document.createElement('div');
         card.className = 'project';
 
-        // ✅ 이미지 배열 처리
+        // 이미지 배열 처리
         const images = project.images && project.images.length
         ? project.images
         : project.image
