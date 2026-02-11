@@ -249,6 +249,9 @@ html {
                             letter-spacing: 5.1px;
                         }
                     }
+                    img {
+                        width:138px;
+                    }
                 }
             }
         }
@@ -281,9 +284,9 @@ html {
     &.active {
         .inner {
             background: #fff;
-            padding: 10px 60px;
+            padding: 20px 60px;
             box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.1);
-            transition: all 0.5s ease;
+            transition: all 0.3s ease;
             .logoWrap {
                 h1 {
                     a {
@@ -318,7 +321,7 @@ html {
     }
     &:not(.active) {
         .inner {
-            transition: all 0.5s ease;
+            transition: all 0.0s ease;
         }
     }
 }
@@ -328,7 +331,7 @@ html {
     display: none;
     .inner {
         width: 100%;
-        max-width: 1200px;
+        max-width: 1400px;
         margin: 0 auto;
         padding: 40px 0px;
         .addrArea {
@@ -494,16 +497,19 @@ section {
         }
         .inner {
             width:100%;
-            max-width:1200px;
+            max-width:1400px;
             margin:0 auto;
             padding:160px 0px;
             text-align: center;
             > h4 {
                 margin-bottom:12px;
+                width:624px;
+                text-align: center;
+                margin:0 auto;
             }
             > p {
-                font-weight: 400;
-                font-size:24px;
+                font-weight: 300;
+                font-size:22px;
                 margin-bottom:80px;
             }
             .tabs {
@@ -512,16 +518,18 @@ section {
                 padding:10px;
                 margin-bottom: 120px;
                 background: #fff;
+                height:80px;
                 border-radius: 50px;
                 box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.1);
                 .tab {
-                    padding: 10px 18px;
-                    border-radius: 20px;
+                    padding: 10px 32px;
+                    border-radius: 50px;
                     cursor: pointer;
-                    font-size: 0.95rem;
+                    font-size: 20px;
+                    font-weight: bold;
+                    color: #384059;
                     &.active {
                         background: linear-gradient(90deg,rgba(244, 244, 255, 1) 0%, rgba(223, 224, 246, 1) 50%, rgba(244, 244, 255, 1) 100%);
-                        color: #384059;
                     }
                 }
             }
@@ -539,12 +547,13 @@ section {
                     cursor: pointer;
                     width:31%;
                     margin-bottom:48px;
+                    gap:40px;
                     &:hover {
                         transform: translateY(-6px);
                     }
                     .thumb {
                         height: 270px;
-                        border-radius: 20px;
+                        border-radius: 12px;
                         background: linear-gradient(135deg, #ddd, #bbb);
                         overflow: hidden;
                         img {
