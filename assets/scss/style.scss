@@ -939,7 +939,9 @@ section {
         }
     }
     section.projectSec {
-        background-position: 50% 50%;
+        &::before {
+            background-position: 78% 100%;
+        }
         .inner {
             h4 {
                 width:288px;

@@ -1269,8 +1269,8 @@ section.projectSec .inner .projects .project .project-info p span {
   section .inner {
     padding: 100px 0px;
   }
-  section.projectSec {
-    background-position: 50% 50%;
+  section.projectSec::before {
+    background-position: 78% 100%;
   }
   section.projectSec .inner h4 {
     width: 288px;
