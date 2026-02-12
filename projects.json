@@ -50,7 +50,17 @@
       "desc": "<span>App</span><span>Renewal</span>",
       "image": "./assets/img/projects/img-project-mobile-01.png"
     },
-
+    
+    {
+      "type": "mobile",
+      "title": "[공무원연금공단] 리뉴얼 프로젝트",
+      "desc": "<span>App</span><span>Renewal</span>",
+       "images": [
+        "./assets/img/projects/img-project-mobile-02.png",
+        "./assets/img/projects/img-project-mobile-03.png",
+        "./assets/img/projects/img-project-mobile-04.png"
+      ]
+    },
 
 
  
